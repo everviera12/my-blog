@@ -2,6 +2,17 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { POST_QUERY } from "@/sanity/lib/queries";
 import { PortableText } from "next-sanity";
 
+// Define the shape of a post returned by the Sanity query.
+type Post = {
+    _id: string;
+    title: string;
+    slug: { current: string };
+    mainImage?: { asset: { _ref: string } };
+    author?: { name: string };
+    publishedAt?: string;
+    body?: unknown;
+};
+
 type PageProps = {
     params: Promise<{ slug: string }>;
 };
@@ -15,7 +26,7 @@ export default async function BlogInsidePage({ params }: PageProps) {
         params: {
             slug,
         },
-    });
+    }) as { data: Post };
 
     if (!post) {
         return <div>Post not found</div>;

@@ -3,10 +3,21 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { POSTS_QUERY } from "@/sanity/lib/queries";
 import { Link, Card } from "@heroui/react";
 
+// Define the shape of a post as returned by the Sanity query.
+type Post = {
+    _id: string;
+    title: string;
+    slug: { current: string };
+    mainImage?: { asset: { _ref: string } };
+    author?: { name: string };
+    publishedAt?: string;
+};
+
 export default async function BlogPage() {
+    // Cast the fetched result to an array of Post objects for type safety.
     const { data } = await sanityFetch({
         query: POSTS_QUERY,
-    });
+    }) as { data: Post[] };
 
     console.log(data);
 
@@ -20,8 +31,7 @@ export default async function BlogPage() {
                     <Card
                         key={post._id}
                         className="relative h-70 overflow-hidden rounded-xl bg-cover bg-center"
-                        style={{ backgroundImage: `url(${urlFor(post?.mainImage?.asset).url()})` }}
-                    >
+                        style={{ backgroundImage: post.mainImage?.asset && `url(${urlFor(post.mainImage.asset).url()})` }}>
                         {/* Top gradient */}
                         <div className="absolute inset-x-0 top-0 h-50 bg-linear-to-b from-black/40 via-black/10 to-transparent" />
 
