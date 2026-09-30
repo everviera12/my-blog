@@ -11,13 +11,11 @@ export default async function BlogPage() {
     console.log(data);
 
     return (
-        <div>
+        <div className="max-w-400 mx-auto p-16">
             <h1 className="font-black text-2xl pb-6">Next & Sanity App</h1>
-            {/* <Link href="/studio">Go to studio page →</Link> */}
-
             <h2>Check our latest Posts! ⬇️</h2>
 
-            <div className="grid grid-cols-4">
+            <div className="grid gap-6 grid-cols-4">
                 {data?.map((post) => (
                     <Card
                         key={post._id}
