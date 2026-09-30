@@ -2,7 +2,6 @@ import Link from "next/link";
 
 export default function HomePage() {
 
-
     return (
         <div>
             <h1 className="font-black text-2xl pb-6">Next & Sanity App</h1>

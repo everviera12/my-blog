@@ -37,7 +37,7 @@ export default async function BlogPage() {
                                 <span className="text-xs text-white/60">{post?.publishedAt || "No date"}</span>
                             </div>
 
-                            <Link href={post?.slug?.current} className="rounded-full bg-white px-4 py-2 text-sm text-black">Read more</Link>
+                            <Link href={`/blog/${post?.slug?.current}`} className="rounded-full bg-white px-4 py-2 text-sm text-black">Read more</Link>
                         </Card.Footer>
                     </Card>
                 ))}

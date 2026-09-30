@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="max-w-400 mx-auto">{children}</body>
+      <body className="">{children}</body>
     </html>
   );
 }
