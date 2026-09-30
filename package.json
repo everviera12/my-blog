@@ -9,6 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@heroui/react": "^3.2.6",
+    "@heroui/styles": "^3.2.6",
     "@sanity/icons": "^5.2.3",
     "@sanity/image-url": "^2.1.1",
     "@sanity/vision": "^5.31.2",
