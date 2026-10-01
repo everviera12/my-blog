@@ -14,12 +14,12 @@ type Post = {
 };
 
 type PageProps = {
-    params: Promise<{ slug: string }>;
+    params: Promise<{ locale: string; slug: string }>;
 };
 
 export default async function BlogInsidePage({ params }: PageProps) {
 
-    const { slug } = await params;
+    const { locale, slug } = await params;
 
     const { data: post } = await sanityFetch({
         query: POST_QUERY,
