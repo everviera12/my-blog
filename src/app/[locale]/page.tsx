@@ -70,9 +70,9 @@ export default async function BlogPage({ params }: PageProps) {
                                         <span className="text-xs text-white/60">{fechaFormateada}</span>
                                     </div>
 
-                                    <Link href={`/${locale}/${post?.slug?.current}`} className="rounded-full bg-white px-4 py-2 text-sm text-black">
+                                    <button className="rounded-full bg-white px-4 py-2 text-sm text-black">
                                         {t("blogSection.cta")}
-                                    </Link>
+                                    </button>
                                 </Card.Footer>
                             </Link>
                         </Card>
