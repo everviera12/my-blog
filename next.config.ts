@@ -4,6 +4,13 @@ import createNextIntlPlugin from "next-intl/plugin";
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
+  redirects: async () => [
+    {
+      source: "/",
+      destination: "/es",
+      permanent: true,
+    },
+  ],
   images: {
     remotePatterns: [
       {
