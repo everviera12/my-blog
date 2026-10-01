@@ -19,7 +19,7 @@ type PageProps = {
 
 export default async function BlogInsidePage({ params }: PageProps) {
 
-    const { locale, slug } = await params;
+    const { slug } = await params;
 
     const { data: post } = await sanityFetch({
         query: POST_QUERY,
