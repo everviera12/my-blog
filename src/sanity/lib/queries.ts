@@ -97,3 +97,12 @@ export const POST_QUERY = defineQuery(`
     }
   }
 `);
+
+export const CATEGORIES_QUERY = defineQuery(`
+  *[_type == "category"] {
+  _id,
+  slug {
+    current
+  },
+  title
+}`)

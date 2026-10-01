@@ -1,24 +1,28 @@
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
-import { BlogPageProps, Post, POSTS_QUERY } from "@/sanity/lib/queries";
-import { Card } from "@heroui/react";
+import { BlogPageProps, CATEGORIES_QUERY, Post, POSTS_QUERY } from "@/sanity/lib/queries";
+import { Card, Label, ListBox, Select } from "@heroui/react";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
 export default async function BlogPage({ params }: BlogPageProps) {
     const { locale } = await params;
-    const { data } = (await sanityFetch({
+
+    const { data: posts } = (await sanityFetch({
         query: POSTS_QUERY,
         params: { locale },
     })) as { data: Post[] };
+
+    const { data: categories } = (await sanityFetch({
+        query: CATEGORIES_QUERY
+    })) as { data: { _id: string; title: string }[] };
 
     const t = await getTranslations({
         locale,
         namespace: "HomePage",
     });
 
-    const formateador = new Intl.DateTimeFormat(
-        locale === "es" ? "es-MX" : "en-US",
+    const formateador = new Intl.DateTimeFormat(locale === "es" ? "es-MX" : "en-US",
         {
             timeZone: "America/Monterrey",
             dateStyle: "full",
@@ -32,11 +36,31 @@ export default async function BlogPage({ params }: BlogPageProps) {
                 <text>{t("text")}</text>
             </div>
 
-            {data?.length === 0 ? (
+            {/* <Select className="w-[256px]" placeholder="Select one">
+                <Label>{t("blogSection.dropdown.category")}</Label>
+
+                <Select.Trigger>
+                    <Select.Value />
+                    <Select.Indicator />
+                </Select.Trigger>
+
+                <Select.Popover>
+                    <ListBox>
+                        {categories.map((category) => (
+                            <ListBox.Item key={category._id} id={category._id} textValue={category.title}>
+                                {category.title}
+                                <ListBox.ItemIndicator />
+                            </ListBox.Item>
+                        ))}
+                    </ListBox>
+                </Select.Popover>
+            </Select> */}
+
+            {posts?.length === 0 ? (
                 <p className="text-center text-red-600">Error: No posts found</p>
             ) : (
                 <div className="grid gap-6 grid-cols-4">
-                    {data?.map((post) => {
+                    {posts?.map((post) => {
                         let fechaFormateada = "Sin fecha";
 
                         if (post.publishedAt) {
