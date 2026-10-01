@@ -42,8 +42,8 @@ export default async function BlogPage() {
                     }
 
                     return (
-                        <Link key={post._id} href={`/blog/${post?.slug?.current}`} className={'w-full'}>
-                            <Card className="group relative h-70 overflow-hidden rounded-xl">
+                        <Card key={post._id} className="group relative h-70 overflow-hidden rounded-xl">
+                            <Link href={`/blog/${post?.slug?.current}`} className={'w-full'}>
                                 <div
                                     className="absolute inset-0 scale-100 bg-cover bg-center transition-transform duration-500 ease-out group-hover:scale-110"
                                     style={{ backgroundImage: post.mainImage?.asset && `url(${urlFor(post.mainImage.asset).url()})`, }}
@@ -67,8 +67,8 @@ export default async function BlogPage() {
                                         Read more
                                     </Link>
                                 </Card.Footer>
-                            </Card>
-                        </Link>
+                            </Link>
+                        </Card>
                     );
                 })}
             </div>
