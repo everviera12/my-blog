@@ -41,7 +41,7 @@ export const postType = defineType({
               title: 'Slug',
               type: 'slug',
               options: {
-                source: 'title',
+                source: 'content.es.title',
               },
             }),
 
@@ -69,7 +69,7 @@ export const postType = defineType({
               title: 'Slug',
               type: 'slug',
               options: {
-                source: 'title',
+                source: 'content.en.title',
               },
             }),
 
@@ -113,13 +113,17 @@ export const postType = defineType({
   ],
   preview: {
     select: {
-      title: 'title',
+      title: 'content.es.title',
       author: 'author.name',
       media: 'mainImage',
     },
     prepare(selection) {
       const { author } = selection
-      return { ...selection, subtitle: author && `by ${author}` }
+
+      return {
+        ...selection,
+        subtitle: author && `by ${author}`,
+      }
     },
   },
 })
