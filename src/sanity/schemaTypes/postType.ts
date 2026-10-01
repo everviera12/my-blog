@@ -1,5 +1,5 @@
-import {DocumentTextIcon} from '@sanity/icons/DocumentText'
-import {defineArrayMember, defineField, defineType} from 'sanity'
+import { DocumentTextIcon } from '@sanity/icons/DocumentText'
+import { ALL_FIELDS_GROUP, defineArrayMember, defineField, defineType } from 'sanity'
 
 export const postType = defineType({
   name: 'post',
@@ -8,20 +8,84 @@ export const postType = defineType({
   icon: DocumentTextIcon,
   fields: [
     defineField({
-      name: 'title',
-      type: 'string',
-    }),
-    defineField({
-      name: 'slug',
-      type: 'slug',
-      options: {
-        source: 'title',
-      },
+      name: 'content',
+      type: 'object',
+      groups: [
+        {
+          name: 'es',
+          title: 'Español',
+        },
+        {
+          name: 'en',
+          title: 'English',
+        },
+        {
+          ...ALL_FIELDS_GROUP,
+          hidden: true,
+        }
+      ],
+      fields: [
+        defineField({
+          name: 'es',
+          type: 'object',
+          group: 'es',
+          fields: [
+            defineField({
+              name: 'title',
+              title: 'Título',
+              type: 'string',
+            }),
+
+            defineField({
+              name: 'slug',
+              title: 'Slug',
+              type: 'slug',
+              options: {
+                source: 'title',
+              },
+            }),
+
+            defineField({
+              name: 'body',
+              title: 'Contenido',
+              type: 'blockContent',
+            }),
+          ],
+        }),
+
+        defineField({
+          name: 'en',
+          type: 'object',
+          group: 'en',
+          fields: [
+            defineField({
+              name: 'title',
+              title: 'Title',
+              type: 'string',
+            }),
+
+            defineField({
+              name: 'slug',
+              title: 'Slug',
+              type: 'slug',
+              options: {
+                source: 'title',
+              },
+            }),
+
+            defineField({
+              name: 'body',
+              title: 'Content',
+              type: 'blockContent',
+            }),
+          ],
+        }),
+      ],
     }),
     defineField({
       name: 'author',
       type: 'reference',
-      to: {type: 'author'},
+      to: { type: 'author' },
     }),
     defineField({
       name: 'mainImage',
@@ -40,15 +104,11 @@ export const postType = defineType({
     defineField({
       name: 'categories',
       type: 'array',
-      of: [defineArrayMember({type: 'reference', to: {type: 'category'}})],
+      of: [defineArrayMember({ type: 'reference', to: { type: 'category' } })],
     }),
     defineField({
       name: 'publishedAt',
       type: 'datetime',
-    }),
-    defineField({
-      name: 'body',
-      type: 'blockContent',
     }),
   ],
   preview: {
@@ -58,8 +118,8 @@ export const postType = defineType({
       media: 'mainImage',
     },
     prepare(selection) {
-      const {author} = selection
-      return {...selection, subtitle: author && `by ${author}`}
+      const { author } = selection
+      return { ...selection, subtitle: author && `by ${author}` }
     },
   },
 })
