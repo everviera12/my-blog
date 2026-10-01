@@ -3,6 +3,9 @@
     "title": "¡Bienvenido a mi Blog!",
     "text": "En este blog compartiré diferentes temas y noticias tecnológicas, herramientas que puedes usar en tu vida cotidiana y más. ¡Cualquier sugerencia es bienvenida!! Disfruta del contenido 😁",
     "blogSection": {
+      "dropdown": {
+        "category": "Categorías"
+      },
       "cta": "Ver más"
     }
   }

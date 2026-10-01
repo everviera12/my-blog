@@ -3,6 +3,9 @@
     "title": "Welcome to my Blog!",
     "text": "In this blog I will share different topics about tech news, tools that you can use in your daily life and more. Any suggestion is welcome!! Enjoy reading 😁",
     "blogSection": {
+      "dropdown": {
+        "category": "Categories"
+      },
       "cta": "Read more"
     }
   }
